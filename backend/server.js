@@ -1,12 +1,13 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { sequelize } = require('./src/models'); // on importe depuis index.js
+const { sequelize } = require('./src/models');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use('/api/livres', require('./src/routes/livreRoutes'));
 
 app.get('/api/test', (req, res) => {
   res.json({ message: 'API L\'Armurerie fonctionne !' });
@@ -14,7 +15,7 @@ app.get('/api/test', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-sequelize.sync() // uniquement pour cette première synchro
+sequelize.sync()
   .then(() => {
     console.log('Base de données synchronisée.');
     app.listen(PORT, () => console.log(`Serveur démarré sur http://localhost:${PORT}`));
