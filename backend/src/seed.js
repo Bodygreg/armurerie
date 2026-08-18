@@ -1,4 +1,5 @@
 require('dotenv').config();
+const bcrypt = require('bcrypt');
 const { sequelize, Utilisateur, Livre, Auteur, Theme, Emprunt, Reservation } = require('./models');
 
 async function seed() {
@@ -41,22 +42,22 @@ async function seed() {
     // 3. Utilisateurs (indépendants, un de chaque rôle pour tester)
     const admin = await Utilisateur.create({
       nom: 'Dupont', prenom: 'Alice', email: 'admin@armurerie.fr',
-      motDePasse: 'motdepasse123', role: 'admin',
+      motDePasse: motDePasseHache, role: 'admin',
     });
 
     const gestionnaire = await Utilisateur.create({
       nom: 'Martin', prenom: 'Julien', email: 'gestionnaire@armurerie.fr',
-      motDePasse: 'motdepasse123', role: 'gestionnaire',
+      motDePasse: motDePasseHache, role: 'gestionnaire',
     });
 
     const adherent1 = await Utilisateur.create({
       nom: 'Bernard', prenom: 'Claire', email: 'claire@test.fr',
-      motDePasse: 'motdepasse123', role: 'adherent',
+      motDePasse: motDePasseHache, role: 'adherent',
     });
 
     const adherent2 = await Utilisateur.create({
       nom: 'Petit', prenom: 'Marc', email: 'marc@test.fr',
-      motDePasse: 'motdepasse123', role: 'adherent',
+      motDePasse: motDePasseHache, role: 'adherent',
     });
 
     // 4. Emprunts et réservations (dépendent des livres ET des utilisateurs)

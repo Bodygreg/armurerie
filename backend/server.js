@@ -8,6 +8,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/api/livres', require('./src/routes/livreRoutes'));
+app.use('/api/auth', require('./src/routes/authRoutes'));
+app.use('/api/reservations', require('./src/routes/reservationRoutes'));
+app.use('/api/emprunts', require('./src/routes/empruntRoutes'));
 
 app.get('/api/test', (req, res) => {
   res.json({ message: 'API L\'Armurerie fonctionne !' });
