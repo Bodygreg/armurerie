@@ -38,6 +38,11 @@ const Utilisateur = sequelize.define('Utilisateur', {
     allowNull: false,
     defaultValue: 'adherent',
   },
+  compteSupprime: {
+  type: DataTypes.BOOLEAN,
+  allowNull: false,
+  defaultValue: false,
+  },
 }, {
   tableName: 'utilisateurs',
   timestamps: true,

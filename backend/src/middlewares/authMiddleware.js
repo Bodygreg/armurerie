@@ -21,7 +21,7 @@ exports.verifierToken = (req, res, next) => {
 exports.verifierRole = (rolesAutorises) => {
   return (req, res, next) => {
     if (!rolesAutorises.includes(req.utilisateur.role)) {
-      return res.status(403).json({ message: 'Accès réservé à ce rôle.' });
+      return res.status(403).json({ message: 'Accès non autorisé.' });
     }
     next();
   };

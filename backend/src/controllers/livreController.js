@@ -1,32 +1,41 @@
 const { Livre, Auteur, Theme, Emprunt, Reservation } = require('../models');
+const { Op } = require('sequelize');
 
 exports.getAllLivres = async (req, res) => {
   try {
+    const { titre, auteur, theme } = req.query;
+
+    const livreWhere = {};
+    if (titre) {
+      livreWhere.titre = { [Op.like]: `%${titre}%` };
+    }
+
+    const auteurInclude = { model: Auteur };
+    if (auteur) {
+      auteurInclude.where = { nom: { [Op.like]: `%${auteur}%` } };
+      auteurInclude.required = true;
+    }
+
+    const themeInclude = { model: Theme };
+    if (theme) {
+      themeInclude.where = { nom: { [Op.like]: `%${theme}%` } };
+      themeInclude.required = true;
+    }
+
     const livres = await Livre.findAll({
+      where: livreWhere,
       include: [
-        { model: Auteur },
-        { model: Theme },
-        {
-          model: Emprunt,
-          required: false,
-          where: { statut: ['en_cours', 'en_retard'] },
-        },
-        {
-          model: Reservation,
-          required: false,
-          where: { statut: 'en_attente' },
-        },
+        auteurInclude,
+        themeInclude,
+        { model: Emprunt, required: false, where: { statut: ['en_cours', 'en_retard'] } },
+        { model: Reservation, required: false, where: { statut: 'en_attente' } },
       ],
     });
 
     const livresAvecStatut = livres.map((livre) => {
       let statut = 'disponible';
-
-      if (livre.Emprunts && livre.Emprunts.length > 0) {
-        statut = 'indisponible';
-      } else if (livre.Reservations && livre.Reservations.length > 0) {
-        statut = 'reserve';
-      }
+      if (livre.Emprunts && livre.Emprunts.length > 0) statut = 'indisponible';
+      else if (livre.Reservations && livre.Reservations.length > 0) statut = 'reserve';
 
       return {
         id: livre.id,

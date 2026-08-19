@@ -49,7 +49,7 @@ exports.login = async (req, res) => {
     }
 
     const utilisateur = await Utilisateur.findOne({ where: { email } });
-    if (!utilisateur) {
+    if (!utilisateur || utilisateur.compteSupprime) {
       return res.status(401).json({ message: 'Email ou mot de passe incorrect.' });
     }
 
