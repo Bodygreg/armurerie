@@ -26,6 +26,16 @@ const Emprunt = sequelize.define('Emprunt', {
     allowNull: false,
     defaultValue: 'en_cours',
   },
+  relanceEnvoyee: {
+  type: DataTypes.BOOLEAN,
+  allowNull: false,
+  defaultValue: false,
+  },
+  alerteGestionnaireEnvoyee: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
 }, {
   tableName: 'emprunts',
   timestamps: false,

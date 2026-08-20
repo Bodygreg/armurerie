@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "node-cron": "^4.6.0",
+    "resend": "^6.20.0"
+  }
+}
