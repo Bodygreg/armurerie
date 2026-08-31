@@ -1,0 +1,264 @@
+.gestionnaire {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+.gestionnaire h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.gestionnaire-onglets {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--couleur-bordure);
+  margin-bottom: 24px;
+}
+
+.gestionnaire-onglets button {
+  flex: 1;
+  min-width: 120px;
+  background: none;
+  border: none;
+  padding: 12px 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--couleur-texte-clair);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.gestionnaire-onglets button.actif {
+  color: var(--couleur-accent);
+  border-bottom-color: var(--couleur-accent);
+  font-weight: 500;
+}
+
+.gestionnaire-tableau {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.gestionnaire-tableau th {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid var(--couleur-bordure);
+  color: var(--couleur-texte-clair);
+  font-weight: 500;
+}
+
+.gestionnaire-tableau td {
+  padding: 10px;
+  border-bottom: 1px solid var(--couleur-bordure);
+}
+
+.gestionnaire-bouton-danger {
+  background: none;
+  border: 1px solid #A13C3C;
+  border-radius: 6px;
+  color: #A13C3C;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.gestionnaire-formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 500px;
+}
+
+.gestionnaire-formulaire input,
+.gestionnaire-formulaire textarea {
+  padding: 10px 14px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 6px;
+  background-color: var(--couleur-blanc);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.gestionnaire-formulaire button {
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--couleur-accent);
+  color: var(--couleur-fond);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.gestionnaire-message,
+.gestionnaire-succes,
+.gestionnaire-erreur {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.gestionnaire-succes {
+  color: #3F5947;
+}
+
+.gestionnaire-erreur {
+  color: #A13C3C;
+}
+
+.gestionnaire-formulaire-inline {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.gestionnaire-formulaire-inline input {
+  flex: 1;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 6px;
+  background-color: var(--couleur-blanc);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.gestionnaire-formulaire-inline button {
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--couleur-accent);
+  color: var(--couleur-fond);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.gestionnaire-bouton-secondaire {
+  background: none;
+  border: 1px solid var(--couleur-accent);
+  border-radius: 6px;
+  color: var(--couleur-accent);
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.gestionnaire-badge {
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 10px;
+}
+
+.badge-en_cours {
+  background-color: var(--couleur-accent-clair);
+  color: #3F5947;
+}
+
+.badge-en_retard {
+  background-color: #F5DCDC;
+  color: #A13C3C;
+}
+
+.gestionnaire-fiche {
+  margin-top: 24px;
+  padding: 16px;
+  background-color: var(--couleur-blanc);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 8px;
+}
+
+.gestionnaire-fiche h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.gestionnaire-fiche h4 {
+  font-size: 13px;
+  margin: 16px 0 8px;
+}
+
+.gestionnaire-fiche-info {
+  font-size: 12px;
+  color: var(--couleur-texte-clair);
+}
+
+.gestionnaire-fiche-liste {
+  list-style: none;
+  font-size: 12px;
+}
+
+.gestionnaire-fiche-liste li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--couleur-bordure);
+}
+
+.gestionnaire-fiche-ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.gestionnaire-formulaire-recherche {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.gestionnaire-formulaire-recherche input {
+  flex: 1;
+  min-width: 140px;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 6px;
+  background-color: var(--couleur-blanc);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+}
+
+.gestionnaire-formulaire-recherche button {
+  height: 38px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--couleur-accent);
+  color: var(--couleur-fond);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.gestionnaire-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.gestionnaire-pagination button {
+  padding: 6px 14px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 6px;
+  background: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.gestionnaire-pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.gestionnaire-pagination span {
+  font-size: 13px;
+  color: var(--couleur-texte-clair);
+}

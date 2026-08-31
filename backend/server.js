@@ -23,6 +23,7 @@ app.use('/api/utilisateurs', require('./src/routes/utilisateurRoutes'));
 app.use('/api/admin', require('./src/routes/adminRoutes'));
 app.use('/api/contact', require('./src/routes/contactRoutes'));
 app.use('/api/gestionnaire', require('./src/routes/gestionnaireRoutes'));
+app.use('/api/alertes', require('./src/routes/alerteRoutes'));
 
 app.get('/api/test', (req, res) => {
   res.json({ message: 'API L\'Armurerie fonctionne !' });

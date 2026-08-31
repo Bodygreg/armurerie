@@ -43,6 +43,15 @@ const Utilisateur = sequelize.define('Utilisateur', {
   allowNull: false,
   defaultValue: false,
   },
+  resetTokenHache: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  resetTokenExpiration: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+
 }, {
   tableName: 'utilisateurs',
   timestamps: true,

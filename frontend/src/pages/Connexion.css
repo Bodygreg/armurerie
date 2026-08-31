@@ -1,0 +1,80 @@
+.connexion {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.connexion h1 {
+  font-size: 22px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.connexion-formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.connexion-formulaire input {
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 6px;
+  background-color: var(--couleur-blanc);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.connexion-formulaire button {
+  height: 44px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--couleur-accent);
+  color: var(--couleur-fond);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.connexion-erreur {
+  color: #A13C3C;
+  font-size: 13px;
+  text-align: center;
+}
+
+.connexion-liens {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.connexion-liens a {
+  font-size: 12px;
+  color: var(--couleur-texte-clair);
+  text-decoration: none;
+}
+
+.connexion-champ-mdp {
+  position: relative;
+  display: flex;
+}
+
+.connexion-champ-mdp input {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.connexion-formulaire .connexion-toggle-mdp {
+  position: absolute;
+  right: 5%;
+  top: -22%;
+  background: none;
+  border: none;
+  color: var(--couleur-texte-clair);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}

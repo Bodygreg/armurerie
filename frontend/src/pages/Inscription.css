@@ -1,0 +1,91 @@
+.inscription {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.inscription h1 {
+  font-size: 22px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.inscription-formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inscription-formulaire input {
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 6px;
+  background-color: var(--couleur-blanc);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.inscription-champ-mdp {
+  position: relative;
+  display: flex;
+}
+
+.inscription-champ-mdp input {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.inscription-toggle-mdp {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--couleur-texte-clair);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.inscription-formulaire button[type="submit"] {
+  height: 44px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--couleur-accent);
+  color: var(--couleur-fond);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.inscription-aide-mdp {
+  font-size: 11px;
+  color: var(--couleur-texte-clair);
+  margin-top: -6px;
+}
+
+.inscription-formulaire button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.inscription-erreur {
+  color: #A13C3C;
+  font-size: 13px;
+  text-align: center;
+}
+
+.inscription-liens {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.inscription-liens a {
+  font-size: 12px;
+  color: var(--couleur-texte-clair);
+  text-decoration: none;
+}

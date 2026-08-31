@@ -21,9 +21,14 @@ const Livre = sequelize.define('Livre', {
   photoCouverture: {
     type: DataTypes.STRING,
   },
+  archive: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
 }, {
   tableName: 'livres',
-  timestamps: false,
+  timestamps: true,
 });
 
 module.exports = Livre;

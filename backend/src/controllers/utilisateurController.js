@@ -45,6 +45,12 @@ exports.supprimerMonCompte = async (req, res) => {
       return res.status(404).json({ message: 'Utilisateur introuvable.' });
     }
 
+    if (utilisateur.role === 'admin') {
+      return res.status(403).json({
+        message: 'Le compte administrateur ne peut pas être supprimé.',
+      });
+    }
+
     const empruntActif = await Emprunt.findOne({
       where: { id_utilisateur: utilisateur.id, statut: ['en_cours', 'en_retard'] },
     });

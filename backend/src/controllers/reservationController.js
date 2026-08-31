@@ -1,4 +1,5 @@
 const { Livre, Emprunt, Reservation } = require('../models');
+const verifierEtNotifierDisponibilite = require('../services/notificationDisponibilite');
 
 exports.createReservation = async (req, res) => {
   try {
@@ -63,10 +64,67 @@ exports.annulerReservation = async (req, res) => {
 
     reservation.statut = 'annulee';
     await reservation.save();
+    await verifierEtNotifierDisponibilite(reservation.id_livre);
 
     res.json(reservation);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Erreur lors de l'annulation." });
+  }
+};
+
+exports.getMesReservations = async (req, res) => {
+  try {
+    const reservations = await Reservation.findAll({
+      where: { id_utilisateur: req.utilisateur.id, statut: 'en_attente' },
+      include: [{ model: Livre }],
+    });
+    res.json(reservations);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Erreur lors de la récupération des réservations.' });
+  }
+};
+
+exports.convertirEnEmprunt = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const reservation = await Reservation.findByPk(id);
+
+    if (!reservation) {
+      return res.status(404).json({ message: 'Réservation introuvable.' });
+    }
+    if (reservation.statut !== 'en_attente') {
+      return res.status(409).json({ message: 'Cette réservation ne peut pas être convertie.' });
+    }
+
+    const nombreEmpruntsActifs = await Emprunt.count({
+      where: { id_utilisateur: reservation.id_utilisateur, statut: ['en_cours', 'en_retard'] },
+    });
+    if (nombreEmpruntsActifs >= 3) {
+      return res.status(409).json({
+        message: 'Cet adhérent a déjà atteint la limite de 3 emprunts simultanés.',
+      });
+    }
+
+    const dateEmprunt = new Date();
+    const dateRetourPrevue = new Date();
+    dateRetourPrevue.setDate(dateRetourPrevue.getDate() + 21);
+
+    const emprunt = await Emprunt.create({
+      id_livre: reservation.id_livre,
+      id_utilisateur: reservation.id_utilisateur,
+      dateEmprunt,
+      dateRetourPrevue,
+      statut: 'en_cours',
+    });
+
+    reservation.statut = 'convertie_en_emprunt';
+    await reservation.save();
+
+    res.status(201).json(emprunt);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Erreur lors de la conversion en emprunt.' });
   }
 };

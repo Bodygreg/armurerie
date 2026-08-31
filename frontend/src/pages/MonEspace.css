@@ -1,0 +1,146 @@
+.mon-espace {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+.mon-espace h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.mon-espace-onglets {
+  display: flex;
+  border-bottom: 1px solid var(--couleur-bordure);
+  margin-bottom: 24px;
+}
+
+.mon-espace-onglets button {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--couleur-texte-clair);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.mon-espace-onglets button.actif {
+  color: var(--couleur-accent);
+  border-bottom-color: var(--couleur-accent);
+  font-weight: 500;
+}
+
+.mon-espace-formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mon-espace-formulaire label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--couleur-texte-clair);
+}
+
+.mon-espace-formulaire input {
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 6px;
+  background-color: var(--couleur-blanc);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--couleur-texte);
+}
+
+.mon-espace-formulaire input:disabled {
+  background-color: var(--couleur-fond);
+  color: var(--couleur-texte-clair);
+}
+
+.mon-espace-formulaire button[type="submit"] {
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--couleur-accent);
+  color: var(--couleur-fond);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.mon-espace-supprimer {
+  width: 100%;
+  height: 42px;
+  margin-top: 16px;
+  background: none;
+  border: 1px solid #A13C3C;
+  border-radius: 8px;
+  color: #A13C3C;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.mon-espace-succes {
+  color: #3F5947;
+  font-size: 13px;
+}
+
+.mon-espace-erreur {
+  color: #A13C3C;
+  font-size: 13px;
+}
+
+.mon-espace-liste-emprunts {
+  list-style: none;
+}
+
+.mon-espace-emprunt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--couleur-bordure);
+}
+
+.mon-espace-emprunt-titre {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.mon-espace-emprunt-dates {
+  font-size: 11px;
+  color: var(--couleur-texte-clair);
+}
+
+.mon-espace-badge {
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.badge-en_cours {
+  background-color: var(--couleur-accent-clair);
+  color: #3F5947;
+}
+
+.badge-en_retard {
+  background-color: #F5DCDC;
+  color: #A13C3C;
+}
+
+.badge-retourne {
+  background-color: var(--couleur-fond);
+  color: var(--couleur-texte-clair);
+}

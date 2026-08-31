@@ -5,6 +5,7 @@ const Auteur = require('./Auteur');
 const Theme = require('./Theme');
 const Emprunt = require('./Emprunt');
 const Reservation = require('./Reservation');
+const Alerte = require('./Alerte');
 
 Auteur.hasMany(Livre, { foreignKey: 'id_auteur' });
 Livre.belongsTo(Auteur, { foreignKey: 'id_auteur' });
@@ -26,6 +27,12 @@ Reservation.belongsTo(Utilisateur, { foreignKey: 'id_utilisateur' });
 Livre.hasMany(Reservation, { foreignKey: 'id_livre' });
 Reservation.belongsTo(Livre, { foreignKey: 'id_livre' });
 
+Utilisateur.hasMany(Alerte, { foreignKey: 'id_utilisateur' });
+Alerte.belongsTo(Utilisateur, { foreignKey: 'id_utilisateur' });
+
+Livre.hasMany(Alerte, { foreignKey: 'id_livre' });
+Alerte.belongsTo(Livre, { foreignKey: 'id_livre' });
+
 module.exports = {
   sequelize,
   Utilisateur,
@@ -34,4 +41,5 @@ module.exports = {
   Theme,
   Emprunt,
   Reservation,
+  Alerte,
 };

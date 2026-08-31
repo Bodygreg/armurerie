@@ -1,4 +1,5 @@
 const { Emprunt, Livre, Utilisateur } = require('../models');
+const verifierEtNotifierDisponibilite = require('../services/notificationDisponibilite');
 
 // Pour un adhérent : ses propres emprunts
 exports.getMesEmprunts = async (req, res) => {
@@ -27,5 +28,31 @@ exports.getAllEmpruntsEnCours = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Erreur lors de la récupération des emprunts.' });
+  }
+};
+
+// Retour d'emprunt (gestionnaire)
+exports.enregistrerRetour = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const emprunt = await Emprunt.findByPk(id);
+
+    if (!emprunt) {
+      return res.status(404).json({ message: 'Emprunt introuvable.' });
+    }
+    if (emprunt.statut === 'retourne') {
+      return res.status(409).json({ message: 'Ce livre a déjà été rendu.' });
+    }
+
+    emprunt.statut = 'retourne';
+    emprunt.dateRetourReelle = new Date();
+    await emprunt.save();
+
+    await verifierEtNotifierDisponibilite(emprunt.id_livre);
+
+    res.json(emprunt);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur lors de l'enregistrement du retour." });
   }
 };

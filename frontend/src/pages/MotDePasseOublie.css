@@ -1,0 +1,102 @@
+.mdp-oublie {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.mdp-oublie h1 {
+  font-size: 22px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.mdp-oublie-texte {
+  font-size: 13px;
+  color: var(--couleur-texte-clair);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.mdp-oublie-formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mdp-oublie-formulaire input {
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 6px;
+  background-color: var(--couleur-blanc);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.mdp-oublie-formulaire button {
+  height: 44px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--couleur-accent);
+  color: var(--couleur-fond);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.mdp-oublie-formulaire button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.mdp-oublie-message,
+.mdp-oublie-erreur {
+  font-size: 13px;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.mdp-oublie-erreur {
+  color: #A13C3C;
+}
+
+.mdp-oublie-liens {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.mdp-oublie-liens a {
+  font-size: 12px;
+  color: var(--couleur-texte-clair);
+  text-decoration: none;
+}
+
+.mdp-oublie-champ-mdp {
+  position: relative;
+  display: flex;
+}
+
+.mdp-oublie-champ-mdp input {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.mdp-oublie-champ-mdp .mdp-oublie-toggle-mdp {
+  position: absolute;
+  right: 5%;
+  top: -22%;
+  background: none;
+  border: none;
+  color: var(--couleur-texte-clair);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.mdp-oublie-aide {
+  font-size: 11px;
+  color: var(--couleur-texte-clair);
+  margin-top: -6px;
+}
