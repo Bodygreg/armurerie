@@ -124,6 +124,9 @@ function GestionAdherents({ token }) {
                 <li key={r.id} className="gestionnaire-fiche-ligne">
                   <span>
                     {r.Livre.titre} — réservé le {new Date(r.dateReservation).toLocaleDateString('fr-FR')} ({r.statut})
+                    {r.statut === 'en_attente' && r.dateLimiteRetrait && (
+                      <> — à retirer avant le {new Date(r.dateLimiteRetrait).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' })}</>
+                    )}
                   </span>
                   {r.statut === 'en_attente' && (
                     <button className="gestionnaire-bouton-secondaire" onClick={() => gererConversion(r.id)}>

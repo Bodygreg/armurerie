@@ -4,6 +4,7 @@ const cors = require('cors');
 const { sequelize } = require('./src/models');
 const cron = require('node-cron');
 const verifierRetards = require('./src/jobs/relanceEmprunts');
+const verifierReservationsExpirees = require('./src/jobs/expirationReservations');
 
 const app = express();
 
@@ -11,6 +12,12 @@ const app = express();
 cron.schedule('0 8 * * *', () => {
   console.log('Exécution du job de vérification des retards...');
   verifierRetards();
+});
+
+// Vérification des réservations expirées
+cron.schedule('0 * * * *', () => {
+  console.log('Vérification des réservations expirées...');
+  verifierReservationsExpirees();
 });
 
 app.use(cors());

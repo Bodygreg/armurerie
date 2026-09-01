@@ -1,5 +1,6 @@
 const { Livre, Emprunt, Reservation } = require('../models');
 const verifierEtNotifierDisponibilite = require('../services/notificationDisponibilite');
+const { calculerDateLimiteRetrait } = require('../utils/horaires');
 
 exports.createReservation = async (req, res) => {
   try {
@@ -29,9 +30,12 @@ exports.createReservation = async (req, res) => {
       return res.status(409).json({ message: 'Ce livre est déjà réservé.' });
     }
 
+    const dateLimiteRetrait = calculerDateLimiteRetrait(new Date());
+
     const reservation = await Reservation.create({
       id_livre,
       id_utilisateur,
+      dateLimiteRetrait,
       statut: 'en_attente',
     });
 

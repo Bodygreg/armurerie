@@ -18,6 +18,10 @@ const Reservation = sequelize.define('Reservation', {
     allowNull: false,
     defaultValue: 'en_attente',
   },
+  dateLimiteRetrait: {
+  type: DataTypes.DATE,
+  allowNull: true,
+  },
 }, {
   tableName: 'reservations',
   timestamps: false,

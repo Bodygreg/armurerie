@@ -24,7 +24,8 @@ function MonEspace() {
   });
   const [messageProfil, setMessageProfil] = useState(null);
   const [chargementProfil, setChargementProfil] = useState(false);
-
+  const [reservations, setReservations] = useState([]);
+  const [chargementReservations, setChargementReservations] = useState(true);
   const [emprunts, setEmprunts] = useState([]);
   const [chargementEmprunts, setChargementEmprunts] = useState(true);
 
@@ -74,6 +75,25 @@ function MonEspace() {
         }
       };
       chargerEmprunts();
+    }
+  }, [onglet, token]);
+
+  useEffect(() => {
+    if (onglet === 'reservations' && token) {
+      const chargerReservations = async () => {
+        setChargementReservations(true);
+        try {
+          const reponse = await api.get('/reservations/mes-reservations', {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setReservations(reponse.data);
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setChargementReservations(false);
+        }
+      };
+      chargerReservations();
     }
   }, [onglet, token]);
 
@@ -142,6 +162,12 @@ function MonEspace() {
         >
           Mes emprunts
         </button>
+        <button
+          className={onglet === 'reservations' ? 'actif' : ''}
+          onClick={() => setOnglet('reservations')}
+        >
+          Mes réservations
+        </button>
       </div>
 
       {onglet === 'profil' && (
@@ -205,6 +231,30 @@ function MonEspace() {
                 <span className={`mon-espace-badge badge-${emprunt.statut}`}>
                   {LIBELLES_STATUT_EMPRUNT[emprunt.statut]}
                 </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {onglet === 'reservations' && (
+        <div className="mon-espace-contenu">
+          {chargementReservations && <p>Chargement...</p>}
+          {!chargementReservations && reservations.length === 0 && (
+            <p>Vous n'avez aucune réservation en attente.</p>
+          )}
+          <ul className="mon-espace-liste-emprunts">
+            {reservations.map((reservation) => (
+              <li key={reservation.id} className="mon-espace-emprunt">
+                <div>
+                  <p className="mon-espace-emprunt-titre">{reservation.Livre.titre}</p>
+                  <p className="mon-espace-emprunt-dates">
+                    À retirer avant le {new Date(reservation.dateLimiteRetrait).toLocaleString('fr-FR', {
+                      dateStyle: 'long',
+                      timeStyle: 'short',
+                    })}
+                  </p>
+                </div>
               </li>
             ))}
           </ul>

@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "cloudinary": "^2.11.0",
     "lucide-react": "^1.33.0",
+    "multer": "^2.3.0",
     "node-cron": "^4.6.0",
     "resend": "^6.20.0"
   }

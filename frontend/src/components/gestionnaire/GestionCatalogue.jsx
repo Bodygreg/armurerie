@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import api from '../../services/api';
 
 const LIBELLES_STATUT = {
@@ -17,6 +17,9 @@ function GestionCatalogue({ token }) {
   const [titre, setTitre] = useState('');
   const [auteur, setAuteur] = useState('');
   const [theme, setTheme] = useState('');
+
+  const idLivreCible = useRef(null);
+  const inputPhotoRef = useRef(null);
 
   const chargerLivres = async (params = {}, pageDemandee = 1) => {
     setChargement(true);
@@ -67,6 +70,33 @@ function GestionCatalogue({ token }) {
     }
   };
 
+  const declencherChoixPhoto = (id) => {
+    idLivreCible.current = id;
+    inputPhotoRef.current.click();
+  };
+
+  const gererChangementPhoto = async (e) => {
+    const fichier = e.target.files[0];
+    if (!fichier || !idLivreCible.current) return;
+
+    const donnees = new FormData();
+    donnees.append('photo', fichier);
+
+    try {
+      await api.patch(`/livres/${idLivreCible.current}/photo`, donnees, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setMessage('Photo mise à jour.');
+      chargerLivres({ titre, auteur, theme }, page);
+    } catch (err) {
+      console.error(err);
+      setMessage(err.response?.data?.message || 'Erreur lors de la mise à jour de la photo.');
+    } finally {
+      e.target.value = '';
+      idLivreCible.current = null;
+    }
+  };
+
   return (
     <div>
       <form onSubmit={gererRecherche} className="gestionnaire-formulaire-recherche">
@@ -76,6 +106,14 @@ function GestionCatalogue({ token }) {
         <button type="submit">Rechercher</button>
       </form>
 
+      <input
+        type="file"
+        accept="image/*"
+        ref={inputPhotoRef}
+        onChange={gererChangementPhoto}
+        style={{ display: 'none' }}
+      />
+
       {message && <p className="gestionnaire-message">{message}</p>}
       {chargement && <p>Chargement...</p>}
       {!chargement && livres.length === 0 && <p>Aucun livre ne correspond à cette recherche.</p>}
@@ -84,6 +122,7 @@ function GestionCatalogue({ token }) {
         <table className="gestionnaire-tableau">
           <thead>
             <tr>
+              <th></th>
               <th>Titre</th>
               <th>Auteur</th>
               <th>Statut</th>
@@ -93,10 +132,23 @@ function GestionCatalogue({ token }) {
           <tbody>
             {livres.map((livre) => (
               <tr key={livre.id}>
+                <td>
+                  {livre.photoCouverture ? (
+                    <img src={livre.photoCouverture} alt={livre.titre} className="gestionnaire-vignette" />
+                  ) : (
+                    <span className="gestionnaire-vignette-placeholder">📖</span>
+                  )}
+                </td>
                 <td>{livre.titre}</td>
                 <td>{livre.auteur}</td>
                 <td>{LIBELLES_STATUT[livre.statut]}</td>
-                <td>
+                <td className="gestionnaire-actions">
+                  <button
+                    className="gestionnaire-bouton-secondaire"
+                    onClick={() => declencherChoixPhoto(livre.id)}
+                  >
+                    Photo
+                  </button>
                   <button
                     className="gestionnaire-bouton-danger"
                     onClick={() => gererArchivage(livre.id, livre.titre)}

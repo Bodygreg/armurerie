@@ -161,6 +161,14 @@ function Detail() {
       )}
 
       {messageReservation && <p className="detail-message">{messageReservation}</p>}
+        {maReservation && maReservation.dateLimiteRetrait && (
+          <p className="detail-limite-retrait">
+            À retirer avant le {new Date(maReservation.dateLimiteRetrait).toLocaleString('fr-FR', {
+              dateStyle: 'long',
+              timeStyle: 'short',
+            })}
+          </p>
+        )}
 
       <div className="detail-conditions">
         <p>

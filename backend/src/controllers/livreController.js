@@ -1,5 +1,6 @@
 const { Livre, Auteur, Theme, Emprunt, Reservation } = require('../models');
 const { Op } = require('sequelize');
+const cloudinary = require('../config/cloudinary');
 
 exports.getAllLivres = async (req, res) => {
   try {
@@ -121,7 +122,7 @@ exports.getLivreById = async (req, res) => {
 
 exports.creerLivre = async (req, res) => {
   try {
-    const { titre, annee, resume, photoCouverture, auteur, theme } = req.body;
+    const { titre, annee, resume, auteur, theme } = req.body;
 
     if (!titre || !auteur || !theme) {
       return res.status(400).json({ message: 'Titre, auteur et thème sont requis.' });
@@ -129,6 +130,22 @@ exports.creerLivre = async (req, res) => {
 
     const [auteurTrouve] = await Auteur.findOrCreate({ where: { nom: auteur } });
     const [themeTrouve] = await Theme.findOrCreate({ where: { nom: theme } });
+
+    let photoCouverture = null;
+
+    if (req.file) {
+      const resultat = await new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          { folder: 'armurerie/couvertures' },
+          (erreur, resultat) => {
+            if (erreur) reject(erreur);
+            else resolve(resultat);
+          }
+        );
+        stream.end(req.file.buffer);
+      });
+      photoCouverture = resultat.secure_url;
+    }
 
     const livre = await Livre.create({
       titre,
@@ -162,5 +179,38 @@ exports.archiverLivre = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Erreur lors de l'archivage du livre." });
+  }
+};
+
+exports.modifierPhotoLivre = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const livre = await Livre.findByPk(id);
+
+    if (!livre) {
+      return res.status(404).json({ message: 'Livre introuvable.' });
+    }
+    if (!req.file) {
+      return res.status(400).json({ message: 'Aucune image fournie.' });
+    }
+
+    const resultat = await new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { folder: 'armurerie/couvertures' },
+        (erreur, resultat) => {
+          if (erreur) reject(erreur);
+          else resolve(resultat);
+        }
+      );
+      stream.end(req.file.buffer);
+    });
+
+    livre.photoCouverture = resultat.secure_url;
+    await livre.save();
+
+    res.json(livre);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Erreur lors de la mise à jour de la photo.' });
   }
 };
