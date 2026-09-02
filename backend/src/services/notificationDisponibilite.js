@@ -19,7 +19,7 @@ async function verifierEtNotifierDisponibilite(id_livre) {
 
   for (const alerte of alertesEnAttente) {
     await resend.emails.send({
-      from: "L'Armurerie <onboarding@resend.dev>",
+      from: process.env.EMAIL_FROM,
       to: alerte.Utilisateur.email,
       subject: `"${alerte.Livre.titre}" est maintenant disponible !`,
       text: `Bonjour ${alerte.Utilisateur.prenom},\n\nLe livre "${alerte.Livre.titre}" que vous attendiez est de nouveau disponible à l'emprunt.`,

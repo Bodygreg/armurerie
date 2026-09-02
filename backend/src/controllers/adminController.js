@@ -31,7 +31,7 @@ exports.creerGestionnaire = async (req, res) => {
     });
 
     const { error: erreurEmail } = await resend.emails.send({
-      from: "L'Armurerie <onboarding@resend.dev>",
+      from: process.env.EMAIL_FROM,
       to: gestionnaire.email,
       subject: 'Votre compte gestionnaire — L\'Armurerie',
       text: `Bonjour ${gestionnaire.prenom},\n\nUn compte gestionnaire a été créé pour vous sur L'Armurerie.\n\nEmail : ${gestionnaire.email}\nMot de passe temporaire : ${motDePasseTemporaire}\n\nConnectez-vous et pensez à changer ce mot de passe dès que possible depuis votre espace personnel.`,

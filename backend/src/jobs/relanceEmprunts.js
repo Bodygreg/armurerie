@@ -17,7 +17,7 @@ async function verifierRetards() {
 
   for (const emprunt of empruntsEnRetard) {
     await resend.emails.send({
-      from: "L'Armurerie <onboarding@resend.dev>",
+      from: process.env.EMAIL_FROM,
       to: emprunt.Utilisateur.email,
       subject: `Rappel : retour de "${emprunt.Livre.titre}" en retard`,
       text: `Bonjour ${emprunt.Utilisateur.prenom},\n\nLe livre "${emprunt.Livre.titre}" devait être rendu le ${emprunt.dateRetourPrevue.toLocaleDateString('fr-FR')}. Merci de le rapporter dès que possible.`,
@@ -53,7 +53,7 @@ async function verifierRetards() {
     } else {
       for (const emprunt of empruntsCritiques) {
         await resend.emails.send({
-          from: "L'Armurerie <onboarding@resend.dev>",
+          from: process.env.EMAIL_FROM,
           to: emailsGestionnaires,
           subject: `Alerte : retard critique sur "${emprunt.Livre.titre}"`,
           text: `Le livre "${emprunt.Livre.titre}", emprunté par ${emprunt.Utilisateur.prenom} ${emprunt.Utilisateur.nom} (${emprunt.Utilisateur.email}), est en retard de plus de 4 semaines.`,

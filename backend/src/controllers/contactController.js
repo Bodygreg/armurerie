@@ -9,7 +9,7 @@ exports.envoyerMessage = async (req, res) => {
     }
 
     const { data, error } = await resend.emails.send({
-      from: "L'Armurerie <onboarding@resend.dev>",
+      from: process.env.EMAIL_FROM,
       to: process.env.CONTACT_EMAIL,
       replyTo: email,
       subject: `Nouveau message de contact — ${nom}`,

@@ -79,7 +79,7 @@ exports.demanderReinitialisation = async (req, res) => {
     const lienReinitialisation = `${process.env.FRONTEND_URL}/reinitialiser-mot-de-passe?token=${token}`;
 
     await resend.emails.send({
-      from: "L'Armurerie <onboarding@resend.dev>",
+      from: process.env.EMAIL_FROM,
       to: utilisateur.email,
       subject: 'Réinitialisation de votre mot de passe',
       text: `Bonjour ${utilisateur.prenom},\n\nCliquez sur ce lien pour choisir un nouveau mot de passe (valable 1 heure) :\n${lienReinitialisation}\n\nSi vous n'êtes pas à l'origine de cette demande, ignorez cet email.`,

@@ -19,7 +19,7 @@ async function verifierReservationsExpirees() {
     await reservation.save();
 
     await resend.emails.send({
-      from: "L'Armurerie <onboarding@resend.dev>",
+      from: process.env.EMAIL_FROM,
       to: reservation.Utilisateur.email,
       subject: `Votre réservation pour "${reservation.Livre.titre}" a expiré`,
       text: `Bonjour ${reservation.Utilisateur.prenom},\n\nVotre réservation pour "${reservation.Livre.titre}" n'a pas été retirée dans le délai imparti. Elle a été annulée et le livre est remis à disposition des autres adhérents.`,
