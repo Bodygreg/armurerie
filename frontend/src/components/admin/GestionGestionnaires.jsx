@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import api from '../../services/api';
 
 function GestionGestionnaires({ token }) {
@@ -9,7 +9,7 @@ function GestionGestionnaires({ token }) {
   const [chargement, setChargement] = useState(false);
   const [gestionnaires, setGestionnaires] = useState([]);
 
-  const chargerGestionnaires = async () => {
+  const chargerGestionnaires = useCallback(async () => {
     try {
       const reponse = await api.get('/admin/gestionnaires', {
         headers: { Authorization: `Bearer ${token}` },
@@ -18,11 +18,11 @@ function GestionGestionnaires({ token }) {
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     chargerGestionnaires();
-  }, []);
+  }, [chargerGestionnaires]);
 
   const gererChangement = (e) => {
     setFormulaire({ ...formulaire, [e.target.name]: e.target.value });

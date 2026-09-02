@@ -64,8 +64,6 @@ async function verifierRetards() {
       }
     }
   }
-
-  console.log(`Vérification des retards effectuée : ${empruntsEnRetard.length} relance(s), ${empruntsCritiques.length} alerte(s) gestionnaire.`);
 }
 
 module.exports = verifierRetards;

@@ -26,9 +26,7 @@ async function verifierReservationsExpirees() {
     });
 
     await verifierEtNotifierDisponibilite(reservation.id_livre);
-  }
-
-  console.log(`Vérification des réservations expirées : ${reservationsExpirees.length} annulée(s).`);
+  }  
 }
 
 module.exports = verifierReservationsExpirees;

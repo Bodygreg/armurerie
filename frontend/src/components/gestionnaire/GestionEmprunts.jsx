@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import api from '../../services/api';
 
 const LIBELLES_STATUT = {
@@ -11,7 +11,7 @@ function GestionEmprunts({ token }) {
   const [chargement, setChargement] = useState(true);
   const [message, setMessage] = useState(null);
 
-  const chargerEmprunts = async () => {
+  const chargerEmprunts = useCallback(async () => {
     setChargement(true);
     try {
       const reponse = await api.get('/emprunts', {
@@ -23,11 +23,11 @@ function GestionEmprunts({ token }) {
     } finally {
       setChargement(false);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     chargerEmprunts();
-  }, []);
+  }, [chargerEmprunts]);
 
   const gererRetour = async (id, titre) => {
     const confirmation = window.confirm(`Confirmer le retour de "${titre}" ?`);

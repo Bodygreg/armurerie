@@ -78,8 +78,7 @@ async function seed() {
       id_utilisateur: adherent1.id,
       statut: 'en_attente',
     });
-
-    console.log('Données de test insérées avec succès.');
+    
     process.exit(0);
   } catch (err) {
     console.error('Erreur pendant le seed :', err);

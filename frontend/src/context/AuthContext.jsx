@@ -35,6 +35,7 @@ export function AuthProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- hook et provider intentionnellement dans le même fichier, contexte simple pour ce projet
 export function useAuth() {
   return useContext(AuthContext);
 }
