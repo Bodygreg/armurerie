@@ -6,6 +6,8 @@ async function seed() {
   try {
     await sequelize.sync(); // s'assure que les tables existent, sans les supprimer
 
+    const motDePasseHache = await bcrypt.hash('motdepasse123', 10);
+
     // 1. Auteurs et thèmes (indépendants)
     const rothfuss = await Auteur.create({ nom: 'Patrick Rothfuss' });
     const herbert = await Auteur.create({ nom: 'Frank Herbert' });
