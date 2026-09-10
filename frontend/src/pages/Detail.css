@@ -149,7 +149,7 @@
   }
 
   .detail-bouton-reservation {
-    width: auto;
+    width: fit-content;
     padding: 0 32px;
   }
 }
