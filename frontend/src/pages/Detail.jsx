@@ -18,7 +18,7 @@ function Detail() {
   const [erreur, setErreur] = useState(null);
   const [messageReservation, setMessageReservation] = useState(null);
   const [maReservation, setMaReservation] = useState(null);
-  const [mesAlertes, setMesAlertes] = useState(null);
+  const [monAlerte, setMonAlerte] = useState(null);
 
   useEffect(() => {
     const chargerLivre = async () => {
