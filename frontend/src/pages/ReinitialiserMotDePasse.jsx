@@ -78,6 +78,7 @@ function ReinitialiserMotDePasse() {
             placeholder="Nouveau mot de passe"
             value={nouveauMotDePasse}
             onChange={(e) => setNouveauMotDePasse(e.target.value)}
+            autoComplete="current-password"
             required
           />
           <button
@@ -99,6 +100,7 @@ function ReinitialiserMotDePasse() {
             placeholder="Confirmez le mot de passe"
             value={confirmation}
             onChange={(e) => setConfirmation(e.target.value)}
+            autoComplete="current-password"
             required
           />
           <button

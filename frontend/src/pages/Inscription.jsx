@@ -132,6 +132,7 @@ function Inscription() {
             placeholder="Mot de passe"
             value={formulaire.motDePasse}
             onChange={gererChangement}
+            autoComplete="current-password"          
             required
           />
           <button
@@ -155,6 +156,7 @@ function Inscription() {
             placeholder="Retapez le mot de passe"
             value={formulaire.confirmationMotDePasse}
             onChange={gererChangement}
+            autoComplete="current-password"
             required
           />
           <button

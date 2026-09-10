@@ -43,6 +43,7 @@ function Connexion() {
             placeholder="Mot de passe"
             value={motDePasse}
             onChange={(e) => setMotDePasse(e.target.value)}
+            autoComplete="current-password"
             required
           />
           <button
