@@ -18,6 +18,7 @@ function Detail() {
   const [erreur, setErreur] = useState(null);
   const [messageReservation, setMessageReservation] = useState(null);
   const [maReservation, setMaReservation] = useState(null);
+  const [mesAlertes, setMesAlertes] = useState(null);
 
   useEffect(() => {
     const chargerLivre = async () => {
@@ -57,6 +58,27 @@ function Detail() {
     };
 
     verifierMaReservation();
+  }, [id, token]);
+
+  useEffect(() => {
+    if (!token) {
+      setMonAlerte(null);
+      return;
+    }
+
+    const verifierMonAlerte = async () => {
+      try {
+        const reponse = await api.get('/alertes/mes-alertes', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const trouvee = reponse.data.find((a) => a.id_livre === Number(id));
+        setMonAlerte(trouvee || null);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    verifierMonAlerte();
   }, [id, token]);
 
   const gererReservation = async () => {
@@ -105,11 +127,12 @@ function Detail() {
     }
 
     try {
-      await api.post(
+      const reponse = await api.post(
         '/alertes',
         { id_livre: livre.id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+      setMonAlerte(reponse.data);
       setMessageReservation('Vous serez prévenu par email dès que ce livre sera disponible.');
     } catch (err) {
       console.error(err);
@@ -153,6 +176,10 @@ function Detail() {
       ) : livre.statut === 'disponible' ? (
         <button className="detail-bouton-reservation" onClick={gererReservation}>
           Réserver cet ouvrage
+        </button>
+      ) : monAlerte ? (
+        <button className="detail-bouton-reservation detail-bouton-desactive" disabled>
+          Vous serez prévenu dès que disponible
         </button>
       ) : (
         <button className="detail-bouton-reservation detail-bouton-secondaire" onClick={gererAlerte}>

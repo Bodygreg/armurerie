@@ -39,3 +39,15 @@ exports.creerAlerte = async (req, res) => {
     res.status(500).json({ message: "Erreur lors de l'inscription à l'alerte." });
   }
 };
+
+exports.getMesAlertes = async (req, res) => {
+  try {
+    const alertes = await Alerte.findAll({
+      where: { id_utilisateur: req.utilisateur.id, statut: 'en_attente' },
+    });
+    res.json(alertes);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Erreur lors de la récupération des alertes.' });
+  }
+};

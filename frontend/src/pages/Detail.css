@@ -130,6 +130,12 @@
   border: 1px solid #A13C3C;
 }
 
+.detail-bouton-desactive {
+  background-color: var(--couleur-bordure);
+  color: var(--couleur-texte-clair);
+  cursor: not-allowed;
+}
+
 .detail-limite-retrait {
   text-align: center;
   font-size: 12px;
