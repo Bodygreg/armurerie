@@ -10,7 +10,7 @@ function Accueil() {
   const [totalPages, setTotalPages] = useState(1);
   const [chargement, setChargement] = useState(true);
   const [erreur, setErreur] = useState(null);
-
+  const [themesDisponibles, setThemesDisponibles] = useState([]);
   const [titre, setTitre] = useState('');
   const [auteur, setAuteur] = useState('');
   const [theme, setTheme] = useState('');
@@ -43,6 +43,14 @@ function Accueil() {
       } catch (err) {
         console.error(err);
       }
+
+      try {
+        const reponseThemes = await api.get('/themes');
+        setThemesDisponibles(reponseThemes.data);
+      } catch (err) {
+        console.error(err);
+      }
+
       await chargerResultats();
     };
 
@@ -78,7 +86,12 @@ function Accueil() {
         <form onSubmit={gererRecherche} className="accueil-formulaire-recherche">
           <input type="text" placeholder="Titre" value={titre} onChange={(e) => setTitre(e.target.value)} />
           <input type="text" placeholder="Auteur" value={auteur} onChange={(e) => setAuteur(e.target.value)} />
-          <input type="text" placeholder="Thème" value={theme} onChange={(e) => setTheme(e.target.value)} />
+          <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+            <option value="">Tous les thèmes</option>
+            {themesDisponibles.map((t) => (
+              <option key={t.id} value={t.nom}>{t.nom}</option>
+            ))}
+          </select>
           <button type="submit">Rechercher</button>
         </form>
       </section>

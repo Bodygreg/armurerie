@@ -87,6 +87,17 @@
   color: var(--couleur-texte-clair);
 }
 
+.accueil-formulaire-recherche select {
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 6px;
+  background-color: var(--couleur-fond);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--couleur-texte);
+}
+
 @media (min-width: 768px) {
   .accueil-formulaire-recherche {
     flex-direction: row;
