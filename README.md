@@ -23,7 +23,6 @@ Projet réalisé dans le cadre de la formation **Développeur Web et Web Mobile*
 10. [Sécurité](#10-sécurité)
 11. [Dépannage](#11-dépannage)
 12. [Limitations connues](#12-limitations-connues)
-13. [Livrables du projet](#13-livrables-du-projet)
 
 ---
 
@@ -387,16 +386,6 @@ Les requêtes authentifiées envoient l'en-tête `Authorization: Bearer <token>`
 - **Pas de modification des informations d'un livre existant** (hors photo de couverture) : un livre peut être ajouté ou archivé.
 - **Maintenance de MySQL sur Railway.** Railway planifie des correctifs de sécurité sur la base managée (y compris des changements de version majeure). Un instantané est pris avant chaque opération ; tester au préalable en local avec la même version (`image: mysql:9` dans le `docker-compose.yml`) est recommandé.
 
----
-
-## 13. Livrables du projet
-
-- Diagramme de cas d'utilisation (UML)
-- Diagramme de séquence « rechercher et réserver un livre »
-- Modèle conceptuel de données (schéma dbdiagram.io)
-- Mockups mobile et desktop (accueil, détail) — Figma
-- Mode d'emploi (guide utilisateur, installation, déploiement)
-- Code source (`backend/`, `frontend/`) et configuration Docker
 
 ---
 
