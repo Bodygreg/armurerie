@@ -12,7 +12,7 @@ exports.createReservation = async (req, res) => {
     }
 
     const livre = await Livre.findByPk(id_livre);
-    if (!livre) {
+    if (!livre || livre.archive) {
       return res.status(404).json({ message: 'Livre introuvable.' });
     }
 
