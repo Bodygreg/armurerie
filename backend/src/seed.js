@@ -1,6 +1,7 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 const { sequelize, Utilisateur, Livre, Auteur, Theme, Emprunt, Reservation } = require('./models');
+const { calculerDateLimiteRetrait } = require('./utils/horaires');
 
 async function seed() {
   try {
@@ -79,6 +80,7 @@ async function seed() {
       id_livre: dune.id,
       id_utilisateur: adherent1.id,
       statut: 'en_attente',
+      dateLimiteRetrait: calculerDateLimiteRetrait(new Date()),
     });
     
     process.exit(0);
